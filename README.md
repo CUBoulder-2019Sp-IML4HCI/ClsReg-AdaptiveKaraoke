@@ -31,3 +31,6 @@ TBD
 
 ## Storyboard
 Coming soon
+
+        ClsReg-AdaptiveKaraoke/Adaptive Karaoke-01.png
+      
