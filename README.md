@@ -20,7 +20,7 @@ Utilize a mobile phone and the corresponding beam forming features in a mobile p
 Utilize a cardioid mic with a low range to record the singer’s voice and block background noise.
 
 ### Digitize Vocal Data: 
-
+TBD
 
 ## Classification + Regression:
  - Classification: Facial detection to identify different singers
