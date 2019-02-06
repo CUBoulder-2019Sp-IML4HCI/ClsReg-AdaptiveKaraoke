@@ -1,7 +1,7 @@
 # ClsReg-AdaptiveKaraoke
 A singing game that changes the scoring parameters based on the range of the singer.
 
-By: Ian Wilkins, Calvin Ritger, Shawn Polson
+**Team Members:** Ian Wilkins, Calvin Ritger, Shawn Polson
 
 # Adaptive Karaoke
 
