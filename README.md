@@ -29,6 +29,12 @@ Utilize a cardioid mic with a low range to record the singer’s voice and block
 ## Feature Engineering:
  - Audio processing with the Maximillian program (e.g., FFTs, Constant Q Transforms)
 
-## Storyboard
-Coming soon
+## Storyboard:
+Coming soon?
+
+## How to Use Our Project:
+TBD
+
+## Demo Video:
+TBD
       
