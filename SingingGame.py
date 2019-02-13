@@ -12,9 +12,9 @@ BLUE = (0,0,255)
     
 pygame.init()
 history = []
-singerColor = WHITE
+singerColor = BLACK
 singerDict = {
-        1:RED,
+        1:WHITE,
         2:GREEN,
         3:BLUE,
         4:BLACK
