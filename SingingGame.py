@@ -21,17 +21,19 @@ singerDict = {
         }
 
 def update_display(x,y):
-    print(x,y)
-    if len(history) < 25:
+    history_size = 20
+    if len(history) < history_size:
         history.append(y)
-        y_avg = np.mode(history)
+        y_avg = np.mean(history)
         
-    elif y > 0.1:
+    elif len(history) >= history_size and y > 0.1:
         history.append(y)
         history.pop(0)
         y_avg = np.mean(history)
+        
     else:
         y_avg = 0
+        
         
     if y_avg > 0:
         DISPLAYSURF.fill(WHITE)
