@@ -4,24 +4,17 @@ from pythonosc import osc_server
 import pygame
 import numpy as np
 import argparse
+import sys
 
 class KareokeGame:
-    def __init__(self, ip='127.0.0.1', port='12000', max_history=20, canvas_size=(800, 300), padding=50):
-        parser = argparse.ArgumentParser()
-        parser.add_argument("--ip",
-            default=ip, help="The ip to listen on")
-        parser.add_argument("--port",
-            type=int, default=port, help="The port to listen on")
-        args = parser.parse_args()
-        
+    def __init__(self, max_history=20, canvas_size=(800, 300), padding=50):
         self.canvas_size = canvas_size
         self.min_y_pos = padding
         self.y_range = canvas_size[1] - (2 * padding)
         
-        #proto_song = [np.abs(np.sin(i)) for i in range(0, 100, 0.1)]
         self.song = [np.abs(np.sin(i)) for i in np.linspace(-np.pi, 10*np.pi, 2000)]
-        self.codify_song()
         self.time = 0
+        self.scores = []
         
         # Define max histoy size and initialize default (empty) history.
         self.max_history = max_history
@@ -42,24 +35,20 @@ class KareokeGame:
         
         self.current_player = 4
         
-        # Create dispatcher to handle incoming OSC messages.
-        self.dispatcher = dispatcher.Dispatcher()
-        self.dispatcher.map("/wek/update", self.update_display)
-        self.dispatcher.map("/wek/singer", self.singer_handler)
+        # Initialize pygame
+        pygame.init()
+        
+        # Initialize pygame font module (used to display text)
+        pygame.font.init()
+        self.myfont = pygame.font.SysFont('Comic Sans MS', 30)
         
         # Initialize white game canvas
         self.game_canvas = pygame.display.set_mode(canvas_size)
         self.game_canvas.fill(self.colors['white'])
         
-        #pygame.draw.circle(self.game_canvas, self.colors['white'], (50, 50), 20, 0)
         pygame.display.set_caption('Hello World!')     
-        
-        self.server = osc_server.ThreadingOSCUDPServer(
-            (args.ip, args.port), self.dispatcher)
-        
-        print("Serving on {}".format(self.server.server_address))
-        self.server.serve_forever()
-   
+
+
     def update_history(self, y):
         # If the len(history) < max_history, append y to history and take mean.
         # Do not pop from history until history has reach max history size.
@@ -86,16 +75,29 @@ class KareokeGame:
         # 2 * padding.
         # y_pos is found by scaling y_range with y_avg, and then adding the
         # minimum y position (the padding).
-        y_pos = int(y * self.y_range) + self.min_y_pos
+        y_pos = self.canvas_size[1] - (int(y * self.y_range) + self.min_y_pos)
         return(y_pos)
 
-        
-    def codify_song(self):
-        for continuous_val in self.song[:]:
-            continuous_val = self.calc_y_pos(continuous_val)
+    def calc_score(self, y, y_hat):
+        # Calculate score as difference of y and y_hat.
+        # Append score to self.scores, and return score for display.
+        score = int(np.abs(y - y_hat) * 100)
+        self.scores.append(score)
+        return(score)
+
+
+    def display_score(self, score):
+        textsurface = self.myfont.render('{}'.format(score), False, (0, 0, 0))
+        self.game_canvas.blit(textsurface,(0,0))
 
 
     def update_display(self, signal_name, y):
+        # Check if game window has been closed. 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+                
         y_avg = self.update_history(y)
         
         if self.time % 5 != 0:
@@ -116,7 +118,6 @@ class KareokeGame:
                                    (50 + (note_index - self.time), self.calc_y_pos(note)),
                                    30,
                                    0)
-        self.time += 1
         
         # If y_avg > 0, update display using y_avg to calculate the y-position 
         # of the feedback circle.
@@ -131,7 +132,10 @@ class KareokeGame:
                                (50, y_pos), 
                                20, 
                                0)
+        score = self.calc_score(self.song[self.time], y_avg)
+        self.display_score(score)
         
+        self.time += 1
         pygame.display.update()
             
         
@@ -140,4 +144,23 @@ class KareokeGame:
     
 if __name__ == "__main__":
     game = KareokeGame()
+    
+    # Parse arguments for host ip and port.
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--ip",
+        default='127.0.0.1', help="The ip to listen on")
+    parser.add_argument("--port",
+        type=int, default='12000', help="The port to listen on")
+    args = parser.parse_args()
+    
+    # Create dispatcher to handle incoming OSC messages.
+    dispatcher = dispatcher.Dispatcher()
+    dispatcher.map("/wek/update", game.update_display)
+    dispatcher.map("/wek/singer", game.singer_handler)
+    
+    server = osc_server.ThreadingOSCUDPServer(
+            (args.ip, args.port), dispatcher)
+        
+    print("Serving on {}".format(server.server_address))
+    server.serve_forever()
 
