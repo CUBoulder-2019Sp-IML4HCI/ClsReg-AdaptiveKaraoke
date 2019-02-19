@@ -14,9 +14,9 @@ By creating a continuous model that can map a singer’s voice to the desired pa
 ## Input Data:
 There are 2 categories of input data: vocal data to create voice mapping model, and image data (AffdexMe facial recognition) to use for singer identification.
 - Maximilian sends OSC messages with peak freq & const-q (105 inputs) to Wekinator on port 6448
-    - Output message is “/wek/update”
+    - Wekinator sends output message “/wek/update” to port 12000
 - Webcam sends OSC messages (1600 inputs) to Wekinator on port 6449
-    - Output message is “/wek/singer”
+    - Wekinator sends output message “/wek/singer” to port 12000
 
 - SingingGame.py listens on port 12000
     - “/wek/update” is a real value for regression
