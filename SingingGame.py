@@ -89,9 +89,9 @@ class KaraokeGame:
 
     def display_score(self, score):
         textsurface = self.myfont.render('{}'.format(score), False, (0, 155, 155))
-        textsurface_total_1 = self.myfont.render('Total: {}'.format(int(np.mean(self.players[1].scores))), False, (0, 255, 0))
-        textsurface_total_2 = self.myfont.render('Total: {}'.format(int(np.mean(self.players[2].scores))), False, (0, 0, 255))
-        textsurface_total_3 = self.myfont.render('Total: {}'.format(int(np.mean(self.players[3].scores))), False, (255, 0, 0))
+        textsurface_total_1 = self.myfont.render('Score: {}'.format(int(np.mean(self.players[1].scores))), False, (0, 255, 0))
+        textsurface_total_2 = self.myfont.render('Score: {}'.format(int(np.mean(self.players[2].scores))), False, (0, 0, 255))
+        textsurface_total_3 = self.myfont.render('Score: {}'.format(int(np.mean(self.players[3].scores))), False, (255, 0, 0))
         self.game_canvas.blit(textsurface,(0,0))
         self.game_canvas.blit(textsurface_total_1,(0,170))
         self.game_canvas.blit(textsurface_total_2,(0,210))
