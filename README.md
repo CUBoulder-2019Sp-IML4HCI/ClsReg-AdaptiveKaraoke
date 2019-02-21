@@ -9,7 +9,7 @@
 ![Screenshot](https://github.com/CUBoulder-2019Sp-IML4HCI/ClsReg-AdaptiveKaraoke/blob/master/Game%20demo%20screenshot.png)
 
 ## Goals:
-Our project had an original goal that was completely modified mid-project. Both are explained below.
+Our project had an original goal that was modified mid-project. Both are explained below.
 ### Original Goal
 To design and implement a singing game that changes the scoring parameters based on the range of the singer. Regression will be used to map the frequency pattern of the singer to the frequency pattern of the song. This continuous model will be used both for input display (i.e. a status sprite to show how accurate a singer’s pitch is), and for scoring. Classification will be used to identify the singer and select the singer’s voice model for scoring. Since singers are discrete, a classifier is an appropriate tool for discerning between singers and selecting the appropriate model.
 
@@ -42,8 +42,8 @@ We learned a lot during the course of this project. We learned:
     - Const-Q analysis effectively bins the audio wave by bands/octaves, so by looking at which bins are "full" (and how "full" they are) one can approximate which musical notes are present in the wave
 - How to use multiple inputs and multiple Wekinator projects to send inputs to the same output (by varying port/OSC message)
 - How to classify people using simple Webcam input
-- _How to create a game in Python!_
-    - We wrote upwards of 200 lines of custom Python code to render all the graphics of our game and to smooth the jittery input provided by the vocal data. That was nothing short of a monumental marathon. 
+- How to create a game in Python!
+    - We wrote upwards of 200 lines of custom Python code to render all the graphics of our game and to smooth the jittery input provided by the vocal data. That was nothing short of a marathon. 
     
 We would have liked to learn how to implement our original idea. It was such a fascinating idea, and the killer of the idea seems to be Wekinator's limitations. We'd love to learn how to disable Wekinator's requirement that no two projects share the same input port. 
 
