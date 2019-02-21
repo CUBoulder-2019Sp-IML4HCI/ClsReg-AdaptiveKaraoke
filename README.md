@@ -48,8 +48,10 @@ We learned a lot during the course of this project. We learned:
 We would have liked to learn how to implement our original idea. It was such a fascinating idea, and the killer of the idea seems to be Wekinator's limitations. We'd love to learn how to disable Wekinator's requirement that no two projects share the same input port. 
 
 ## Feature Engineering:
- - Audio processing with the Maximillian program (e.g., Constant Q analyser and Peak frequency)
-
+ - Audio processing with the Maximillian program (Constant-Q analyser and Peak frequency)
+ - Value smoothing in Python
+ 
+For feature engineering, we're extracting sung pitch from an audio input by use of Maximillian's Const-Q analyser and Peak frequency and then smoothing that input in Python. Peak frequency returns the one frequency which is most present in an audio wave, and Const-Q analysis effectively bins the wave by bands/octaves, so by looking at which bins are "full" (and how "full" they are) one can approximate which musical notes are present in the wave. Our Wekinator model performs regression on that input from Maximilian, sends the output of the regression to our Python game, and in the Python code we take the average of 20 pitch samples to compute the Y-axis position of the circular sprite.
 
 ## How to Use Our Project:
 TBD
