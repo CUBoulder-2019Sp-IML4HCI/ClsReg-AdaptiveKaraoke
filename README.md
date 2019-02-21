@@ -67,6 +67,21 @@ There are five main components to our project, each of which must be present for
  - outputing one classifier with at least 2 classes with the message "/wek/singer" to port 12000
 5. The Python game (`SingingGame.py` in this repo).
 
+Open and run Maximilian. Uncheck all boxes except for "Const-Q" and "Peak frequency". Open and run the simple webcam program. Create the two Wekinator projects as described above. Train the first Wekinator project with a neural network by following these steps:
+ 1. Manually set the slider to ~0.1
+ 2. Record a singer holding one "low" note
+ 3. Manually set the slider to ~0.9
+ 4. Record a singer holding one "high" note
+ 5. Train the model
+Note that `SingGUI_InitialExperimentation` in this repo contains a Wekinator project which is correctly set up as just described. After that, train the second Wekinator project with the KNN algorithm by following these steps:
+ 1. Manually set the class to "1"
+ 2. Record some examples of just the background, i.e., without the singer in view
+ 3. Manually set the class to "2"
+ 4. Record some examples of the singer being in view
+ 5. Train the model
+After all that, the inputs and Wekinator projects are ready to go. So run both Wekinator projects then run `SingingGame.py` (e.g. `python SingingGame.py`). The game starts. 
+Sing higher notes to move the sprite upward, and sing lower notes to move the sprite downward. When vertical red bars appear, quickly move out of view to avoid penalties. 
+
 ## Demo Video:
 TBD
       
