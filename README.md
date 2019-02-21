@@ -1,5 +1,7 @@
 # ClsReg-AdaptiveKaraoke
-A singing game that changes the scoring parameters based on the range of the singer.
+**Original concept:** A singing game that changes the scoring parameters based on the range of the singer.
+
+**Final concept:** A sort of vocal-controlled Temple Run–like game where a singer must 1) control their pitch to stay within a track and 2) move out of the webcam's view to "dodge" obstacles.
 
 **Team Members:** Ian Wilkins, Calvin Ritger, Shawn Polson
 
