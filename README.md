@@ -31,7 +31,7 @@ The vocal data is input as unprocessed audio waves recorded by a microphone. Max
     - “/wek/update” is a real value for regression
     - “/wek/singer” is an int value for classification
 
-## Analysis of model performance
+## Analysis of Model Performance
 TBD
 _"4. An analysis of model performance, justifying your choices about model construction. Demonstrate quantitatively why the ML algorithm and parameters you used were the right ones. If you experimented with different options, provide and interpret data documenting the results of your experiments."_
 
