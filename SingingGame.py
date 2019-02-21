@@ -1,4 +1,6 @@
 
+
+
 from pythonosc import dispatcher
 from pythonosc import osc_server
 import pygame
@@ -7,13 +9,32 @@ import argparse
 import sys
 
 class KaraokeGame:
+    
+    def gameTrack(tupArray):
+        noteArray = []
+        for note, duration in tupArray:
+            noteArray += [note for i in range(duration)]
+        return (noteArray)
+    
     def __init__(self, max_history=20, canvas_size=(800, 300), padding=50, players=[]):
         self.canvas_size = canvas_size
         self.min_y_pos = padding
         self.y_range = canvas_size[1] - (2 * padding)
         self.players = players
         
-        self.song = [np.abs(np.sin(i)) for i in np.linspace(-np.pi, 40*np.pi, 8000)]
+        arr1 = np.linspace(0,1,300)
+        arr2 = np.linspace(1,0,300)
+        arr3 = np.linspace(0, 0.5, 100)
+        arr4 = np.linspace(0.5,0,200)
+        arr5 =[np.abs(np.sin(i)) for i in np.linspace(-np.pi, np.pi, 500)]
+        arr6 = np.linspace(0,0.2,100)
+        arr7 = np.linspace(0.2,0.2,100)
+        arr8 = np.linspace(0.7,0.7,100)
+        arr9 = np.linspace(0.7,0,200)
+        arr10 = [np.abs(np.sin(i)) for i in np.linspace(-np.pi, np.pi, 700)]
+        arr11 = list(arr1) +  list(arr2) +list(arr3) +list(arr4) +list(arr5) +list(arr6)  + list(arr7) + list(arr8) + list(arr9) + list(arr10)
+        
+        self.song = arr11
         # Place a red bar every 500 notes
         for i in range(0, len(self.song)):
             if (i % 500 == 0):
