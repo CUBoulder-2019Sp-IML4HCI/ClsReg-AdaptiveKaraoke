@@ -32,8 +32,19 @@ The vocal data is input as unprocessed audio waves recorded by a microphone. Max
     - “/wek/singer” is an int value for classification
 
 ## Analysis of Model Performance
-TBD
-_"4. An analysis of model performance, justifying your choices about model construction. Demonstrate quantitatively why the ML algorithm and parameters you used were the right ones. If you experimented with different options, provide and interpret data documenting the results of your experiments."_
+Classification
+For face recognition, a KNN was chosen because it is fast, cheap, and gaurenteed to have not more than 2x the Bayesian error rate. In a relatively controlled environment for a single player game, a KNN offers the performance and accuracy needed for a positive game experience, that is quick to train without any heavy processing. It should be noted that a KNN is not necessarily the most memory efficient model, but for the purposes of this project, that was a sacrafice we were willing to take. In production environments, a neural network, eigenface engine, or support vector machine would be better options in terms of memory, but may require more time and data to train. 
+
+Regression
+There are several facets of regression performance that must be considered:
+1. Feature Handling + Bias vs Variance Trade-Off
+Our model recieves 105 extracted features from Maximillian. With higher dimensionality comes a greater risk of increased variance. In order to capture a user's voice as accurately as possible, it is desirable to reduce the inductive bias the model assumes, but limit complexity. Reduction of bias directly coincides with an increase in variance, and such an increase leads to overfitting and a choppier user voice profile model. (As discussed in the next section, a training method was developed to aid in better model performance and usability.) We need a model that can act as a universal function approximator (not simply limited to lower order polynomial regression) and natively handle higher dimensionality training samples with the possibility of nullifying weights and biases (dropouts). As such, a Neural Network Regressor was the model of choice for our user voice profile regressor.
+
+2. Speed and ease of training.
+Although a Neural Network has many of the features we want for function approximation, it takes longer to train, and this is damaging to the user experience. As such, we elevted to train the model using a minimum of 2 frequency ranges: the user's upper and lower range. Limiting the number of training examples provides adequate performance when quick startup is desired, and the iterative update of the neural network allows for greater customization later on if further tuning is preferred.
+
+3. Detail, definition, and normalization of ranging.
+Linear and polynomial regression lacked accuity in higher dimensional data. Without any preprocessing, polynomial regression generated hypersurfaces that had too stong a bias to accurately capture the intricacies of a human voice, while remaining too sensitive to extraneous noise. Though polynomial and liner regression had great promise in their ability to reduce variance and better natively normalize our data, the inductive bias was not well suited for the application of our noisy (pun intended) input features. Neural netwroks were the most capable of defining weights and biases of important features, and minimizing the effect of noisy and extraneous data. As such, Neural networks were cosen as our final model for regression.
 
 ## What We Learned
 We learned a lot during the course of this project. We learned: 
