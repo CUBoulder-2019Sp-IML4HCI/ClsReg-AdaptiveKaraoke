@@ -96,5 +96,5 @@ After all that, the inputs and Wekinator projects are ready to go. So run both W
 Sing higher notes to move the sprite upward, and sing lower notes to move the sprite downward. When vertical red bars appear, quickly move out of view to avoid penalties. 
 
 ## Demo Video:
-TBD
+https://youtu.be/bOZO-vyBYGw
       
