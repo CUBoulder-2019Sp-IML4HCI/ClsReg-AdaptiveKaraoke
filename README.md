@@ -54,7 +54,18 @@ We would have liked to learn how to implement our original idea. It was such a f
 For feature engineering, we're extracting sung pitch from an audio input by use of Maximillian's Const-Q analyser and Peak frequency and then smoothing that input in Python. Peak frequency returns the one frequency which is most present in an audio wave, and Const-Q analysis effectively bins the wave by bands/octaves, so by looking at which bins are "full" (and how "full" they are) one can approximate which musical notes are present in the wave. Our Wekinator model performs regression on that input from Maximilian, sends the output of the regression to our Python game, and in the Python code we take the average of 20 pitch samples to compute the Y-axis position of the circular sprite.
 
 ## How to Use Our Project:
-TBD
+There are five main components to our project, each of which must be present for the game to work.
+1. Maximilain. This is a C++ program available at http://www.wekinator.org/examples/#Audio (under the **Audio -> Various audio features** header)
+2. The "simple webcam" with 1600 inputs. This is a Processing program that we have stored in the `SingerClassifier_1600Inputs` folder in this repo.
+3. A Wekinator project with the following configurations:
+ - 105 inputs 
+ - listening for message "/wek/inputs" on port 6448
+ - outputting 1 continuous output with the message "/wek/update" to port 12000
+4. Another Wekinator project with the following configurations:
+ - 1600 inputs
+ - listening for message "/wek/inputs" on port 6449
+ - outputing one classifier with at least 2 classes with the message "/wek/singer" to port 12000
+5. The Python game (`SingingGame.py` in this repo).
 
 ## Demo Video:
 TBD
