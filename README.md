@@ -4,6 +4,7 @@ A singing game that changes the scoring parameters based on the range of the sin
 **Team Members:** Ian Wilkins, Calvin Ritger, Shawn Polson
 
 # Adaptive Karaoke
+![Screenshot](https://github.com/CUBoulder-2019Sp-IML4HCI/ClsReg-AdaptiveKaraoke/blob/master/Game%20demo%20screenshot.png)
 
 ## Goals:
 To design and implement a singing game that changes the scoring parameters based on the range of the singer. Regression will be used to map the frequency pattern of the singer to the frequency pattern of the song. This continuous model will be used both for input display (i.e. a status sprite to show how accurate a singer’s pitch is), and for scoring. Classification will be used to identify the singer and select the singer’s voice model for scoring. Since singers are discrete, a classifier is an appropriate tool for discerning between singers and selecting the appropriate model.
