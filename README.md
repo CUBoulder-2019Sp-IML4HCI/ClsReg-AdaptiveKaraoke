@@ -9,7 +9,12 @@
 ![Screenshot](https://github.com/CUBoulder-2019Sp-IML4HCI/ClsReg-AdaptiveKaraoke/blob/master/Game%20demo%20screenshot.png)
 
 ## Goals:
+Our project had an original goal that was completely modified mid-project. Both are explained below.
+### Original Goal
 To design and implement a singing game that changes the scoring parameters based on the range of the singer. Regression will be used to map the frequency pattern of the singer to the frequency pattern of the song. This continuous model will be used both for input display (i.e. a status sprite to show how accurate a singer’s pitch is), and for scoring. Classification will be used to identify the singer and select the singer’s voice model for scoring. Since singers are discrete, a classifier is an appropriate tool for discerning between singers and selecting the appropriate model.
+
+### Final Modified Goal
+To design and implement a sort of vocal-controlled Temple Run–like game where the player's goal is to keep a circular sprite within an autoscrolling track by singing with varying pitch. The player is scored based on how well they keep the sprite within the track. Additionally, vertical-bar obstacles frequently appear and the player must "dodge" them by physically moving out of the webcam's view. We're excited about this final implementation because, for one, it works whereas the original idea did not. But moreover, it's fun to play! Singing and moving quickly are engaging activities, and because the game is trained to the player's vocal range, it feels personal. Regression is used to map the player's vocal range to the Y-axis position of the sprite, and classification is used to detect whether the player is in front of the webcam.
 
 ## Motivation:
 By creating a continuous model that can map a singer’s voice to the desired pattern, the game can be adapted to the specific details of the singer. Sickness, morphological differences, age differences, emotive differences can all contribute to differences from the mean human voice and the expected voice pattern of the song. An adaptive continuous model of each player’s voice can be used to map a unique individual’s voice pattern to the expected pattern. Player’s will no longer be scored on how well they meet an absolute standard, they will instead be scored based on their control within their own range.
