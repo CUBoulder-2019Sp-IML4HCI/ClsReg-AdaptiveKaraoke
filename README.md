@@ -20,34 +20,22 @@ To design and implement a sort of vocal-controlled Temple Run–like game where 
 We were not able to accomplish the original concept of our project, but we're proud of what we ended up making. The biggest reason our first idea did not work was that Wekinator does not allow multiple projects to listen to the same port; that would've been required to train multiple models on multiple voices and have them all responding to the same audio input. We explored the code behind our audio input program, Maximilian, but there is seemingly no place in the source code to change the OSC port it uses. Moving on to what does work, however, we're successfully extracting sung pitch from an audio input (using Maximillian's Const-Q analyser and Peak frequency), we're mapping that input to a value between 0 and 1 (with soft limits) using a neural net in Wekinator, and we're using that output in a totally custom-built Python program that is our game. Our biggest accomplishment by far was writing the Python code to create our game. We're also successfully using webcam input to detect if a player is in view. Our classification model is capable of detecting an arbitrarily large number of players, but for this game we only care if one player is in view. 
 
 ## Input Data:
-There are 2 categories of input data: vocal data to create voice mapping model, and image data (AffdexMe facial recognition) to use for singer identification.
-- Maximilian sends OSC messages with peak freq & const-q (105 inputs) to Wekinator on port 6448
+There are 2 categories of input data: vocal data to create voice mapping models, and video data to use for singer identification.
+The vocal data is input as unprocessed audio waves recorded by a microphone. Maximilian recieves the audio waves and outputs a combination of Const-Q analysis and Peak frequency of that wave, which effectively extracts pitch as 105 real-value inputs. The video data is input as a live feed from a webcam that is compressed to 1600 pixel values.
+
+- Maximilian sends OSC messages Const-Q and Peak frequency (105 inputs) to Wekinator on port 6448
     - Wekinator sends output message “/wek/update” to port 12000
 - Webcam sends OSC messages (1600 inputs) to Wekinator on port 6449
     - Wekinator sends output message “/wek/singer” to port 12000
-
 - SingingGame.py listens on port 12000
     - “/wek/update” is a real value for regression
     - “/wek/singer” is an int value for classification
 
 
-### Vocal Data:
-We have considered 2 main options for recording voices.
-Utilize a mobile phone and the corresponding beam forming features in a mobile phone’s mic to isolate the singer’s voice from surrounding noise.
-Utilize a cardioid mic with a low range to record the singer’s voice and block background noise.
-
-### Digitize Vocal Data: 
-(Using Maximillian)
-
-## Classification + Regression:
- - Classification: Facial detection to identify different singers
- - Regression: Frequency mapping
 
 ## Feature Engineering:
- - Audio processing with the Maximillian program (e.g., FFTs, Constant Q Transforms)
+ - Audio processing with the Maximillian program (e.g., Constant Q analyser and Peak frequency)
 
-## Storyboard:
-Coming soon?
 
 ## How to Use Our Project:
 TBD
